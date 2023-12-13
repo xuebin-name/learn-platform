@@ -8,6 +8,10 @@
     <artifactId>learn-platform</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>platform-bff</module>
+        <module>platform-commons</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
@@ -41,6 +45,10 @@
         <hutool.version>5.8.23</hutool.version>
         <fastjson.version>2.0.42</fastjson.version>
         <rabbit.version>3.2.0</rabbit.version>
+        <druid.version>1.2.20</druid.version>
+        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <jwt.version>0.12.3</jwt.version>
+        <pagehelper.version>1.4.6</pagehelper.version>
     </properties>
 
 
@@ -77,6 +85,32 @@
                 <scope>import</scope>
             </dependency>
             <!--==================================================================================-->
+            <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
