@@ -9,10 +9,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>platform-commons</artifactId>
+    <artifactId>platform-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>learn-platform-core</module>
+        <module>platform-user-service</module>
     </modules>
 
     <properties>
