@@ -3,6 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.learn.platform.service.dao.UserDao">
+
+    <insert id="insert" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into p_user (id, platform_id, user_name, attr, mobile, personal_signature, nick_name, sex, gmt_create,
+                            gmt_update)
+        values (#{id}, #{platformId}, #{userName}, #{attr}, #{mobile}, #{personalSignature}, #{nickName}, #{sex},
+                #{gmtCreate}, #{gmtUpdate})
+    </insert>
+
+    <insert id="batchInsert">
+        insert into p_user (id, platform_id, user_name, attr, mobile, personal_signature, nick_name, sex, gmt_create,
+        gmt_update)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{id}, #{platformId}, #{userName}, #{attr}, #{mobile}, #{personalSignature}, #{nickName}, #{sex},
+            #{gmtCreate}, #{gmtUpdate})
+        </foreach>
+    </insert>
+
+    <update id="update">
+        update p_user
+        set user_name = #{userName}, attr = #{attr}, mobile = #{mobile}, personal_signature = #{personalSignature},
+            platform_id = #{platformId}, nick_name = #{nickName}, sex = #{sex}, gmt_update = #{gmtUpdate}
+        where id = #{id}
+    </update>
+
     <select id="selectOne" resultType="com.learn.platform.po.User">
         select *
         from p_user
@@ -25,13 +50,13 @@
         </where>
     </select>
 
-    <select id="selectById">
+    <select id="selectById" resultType="com.learn.platform.po.User">
         select *
         from p_user
         where id = #{id}
     </select>
 
-    <select id="selectByPlatformId">
+    <select id="selectByPlatformId" resultType="com.learn.platform.po.User">
         select *
         from p_user
         where platform_id = #{platformId}
