@@ -7,15 +7,13 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 /**
  * 用户业务处理service
  */
 @Service
 @DubboService
 public class UserServiceImpl implements UserService {
-    @Resource
+    @Autowired
     private UserDao userDao;
 
     /**

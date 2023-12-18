@@ -1,7 +1,7 @@
 package com.learn.platform.service;
 
+
 import com.learn.platform.po.User;
-import org.springframework.stereotype.Service;
 
 /**
  * 用户业务接口声明

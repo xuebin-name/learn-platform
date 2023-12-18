@@ -1,0 +1,20 @@
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/learn-platform?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        namespace: 900500a5-8858-4f1c-ae98-183e6e5c3119
+        group: DEFAULT_GROUP
+        data-id: user-service.yaml
+        refresh: true
+  application:
+    name: user-service
+
