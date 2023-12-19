@@ -1,4 +1,4 @@
-package com.learn.platform.enums;
+package com.learn.platform.entity.enums;
 
 import lombok.Getter;
 

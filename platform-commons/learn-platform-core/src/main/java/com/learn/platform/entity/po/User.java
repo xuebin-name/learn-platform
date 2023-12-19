@@ -1,7 +1,7 @@
-package com.learn.platform.po;
+package com.learn.platform.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.learn.platform.util.DateUtils;
+import com.learn.platform.entity.util.DateUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

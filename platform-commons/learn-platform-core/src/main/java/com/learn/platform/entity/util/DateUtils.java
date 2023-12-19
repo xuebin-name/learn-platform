@@ -1,4 +1,4 @@
-package com.learn.platform.util;
+package com.learn.platform.entity.util;
 
 import java.io.Serializable;
 import java.util.Stack;

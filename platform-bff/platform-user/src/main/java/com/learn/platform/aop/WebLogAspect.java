@@ -3,7 +3,6 @@ package com.learn.platform.aop;
 import com.google.gson.Gson;
 import com.learn.platform.annotation.WebLog;
 import jakarta.servlet.http.HttpServletRequest;
-import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -66,6 +65,7 @@ public class WebLogAspect {
         logger.info("IP             : {}", request.getRemoteAddr());
         // 打印请求入参
         logger.info("Request Args   : {}", new Gson().toJson(joinPoint.getArgs()));
+        logger.info("===========================================================================================");
     }
 
     /**

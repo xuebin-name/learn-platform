@@ -1,7 +1,7 @@
 package com.learn.platform.service;
 
 
-import com.learn.platform.po.User;
+import com.learn.platform.entity.po.User;
 
 /**
  * 用户业务接口声明

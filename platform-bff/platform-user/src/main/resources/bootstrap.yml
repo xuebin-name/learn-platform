@@ -1,5 +1,3 @@
-
-
 spring:
   profiles:
     active: dev
@@ -8,11 +6,11 @@ spring:
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
-        namespace: 900500a5-8858-4f1c-ae98-183e6e5c3119
+        namespace: 250b17a7-fe38-4ce6-8601-2fc8f404b612
         group: DEFAULT_GROUP
-        data-id: user-service.yaml
+        data-id: user-controller.yaml
         refresh: true
   application:
-    name: user-service
+    name: user-controller
 
 

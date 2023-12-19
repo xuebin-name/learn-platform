@@ -1,5 +1,6 @@
 package com.learn.platform;
 
+import cn.hutool.core.lang.UUID;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +34,6 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+        System.out.println(UUID.randomUUID().toString().toUpperCase());
     }
 }

@@ -1,13 +1,11 @@
 package com.learn.platform.controller;
 
 import com.learn.platform.annotation.WebLog;
-import com.learn.platform.common.PlatformResult;
-import com.learn.platform.po.User;
+import com.learn.platform.entity.common.PlatformResult;
+import com.learn.platform.entity.po.User;
 import com.learn.platform.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -25,7 +23,6 @@ public class UserController implements Serializable {
     private static final long serialVersionUID = 8323383919435006388L;
 
     @DubboReference
-    @Autowired
     private UserService userService;
 
     /**

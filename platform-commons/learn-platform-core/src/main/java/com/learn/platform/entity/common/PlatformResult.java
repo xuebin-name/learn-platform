@@ -1,7 +1,6 @@
-package com.learn.platform.common;
+package com.learn.platform.entity.common;
 
-import com.alibaba.nacos.api.common.ResponseCode;
-import com.learn.platform.enums.ResponseCodeEnum;
+import com.learn.platform.entity.enums.ResponseCodeEnum;
 import lombok.Data;
 
 /**

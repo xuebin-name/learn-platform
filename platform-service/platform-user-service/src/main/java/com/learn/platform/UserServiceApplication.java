@@ -16,6 +16,8 @@ public class UserServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
-        System.out.println("用户 service 服务 启动成功");
+        System.out.println("==============================================================");
+        System.out.println("====================user-service服务 启动成功===================");
+        System.out.println("==============================================================");
     }
 }

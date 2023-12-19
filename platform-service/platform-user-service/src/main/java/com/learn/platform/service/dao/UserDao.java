@@ -1,6 +1,6 @@
 package com.learn.platform.service.dao;
 
-import com.learn.platform.po.User;
+import com.learn.platform.entity.po.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

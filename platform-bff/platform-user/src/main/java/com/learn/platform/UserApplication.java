@@ -1,5 +1,6 @@
 package com.learn.platform;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,10 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date 2023/12/15 16:16
  */
 
+@EnableDubbo
 @SpringBootApplication
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class,args);
-        System.out.println("=====================用户服务启动成功=====================");
+        System.out.println("==============================================================");
+        System.out.println("======================user-bff 服务 启动成功====================");
+        System.out.println("==============================================================");
     }
 }
