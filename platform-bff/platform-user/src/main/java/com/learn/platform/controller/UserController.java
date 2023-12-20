@@ -6,6 +6,7 @@ import com.learn.platform.entity.po.User;
 import com.learn.platform.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -24,6 +25,14 @@ public class UserController implements Serializable {
 
     @DubboReference
     private UserService userService;
+
+    @Value("${testValue}")
+    private String testValue;
+
+    @GetMapping("/test")
+    public PlatformResult<String> test(){
+        return PlatformResult.success(testValue);
+    }
 
     /**
      * 根据id获取用户信息
