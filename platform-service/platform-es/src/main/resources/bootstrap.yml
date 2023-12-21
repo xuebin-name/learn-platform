@@ -16,7 +16,3 @@ spring:
         server-addr: 127.0.0.1:8848
         namespace: 6787988d-8c13-4a96-9d4e-5b6bad1fe14b
         group: DEFAULT_GROUP
-  elasticsearch:
-    cluster-name: ${spring.application.name}
-    connection-timeout: 5000
-

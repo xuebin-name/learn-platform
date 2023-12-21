@@ -1,7 +1,7 @@
 package com.learn.platform.service.impl;
 
 import com.learn.platform.entity.po.User;
-import com.learn.platform.service.UserService;
+import com.learn.platform.service.user.UserService;
 import com.learn.platform.service.dao.UserDao;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;

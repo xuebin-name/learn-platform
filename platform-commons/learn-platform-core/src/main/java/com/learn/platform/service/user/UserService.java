@@ -1,4 +1,4 @@
-package com.learn.platform.service;
+package com.learn.platform.service.user;
 
 
 import com.learn.platform.entity.po.User;

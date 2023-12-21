@@ -3,7 +3,7 @@ package com.learn.platform.controller;
 import com.learn.platform.annotation.WebLog;
 import com.learn.platform.entity.common.PlatformResult;
 import com.learn.platform.entity.po.User;
-import com.learn.platform.service.UserService;
+import com.learn.platform.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Value;
