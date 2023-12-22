@@ -2,6 +2,8 @@ package com.learn.platform;
 
 import cn.hutool.http.Method;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.GetRequest;
+import co.elastic.clients.elasticsearch.core.GetResponse;
 import co.elastic.clients.json.JsonpMapper;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.DefaultTransportOptions;
@@ -65,14 +67,16 @@ public class AppTest
 
 
 
-    public void testEsClient(){
+    public void testEsClient() throws IOException {
         HttpHost httpHost = new HttpHost("127.0.0.1", 9200, "http");
         RestClient restClient = RestClient.builder(httpHost).build();
         JsonpMapper mapper = new JacksonJsonpMapper();
         ElasticsearchTransport transport = new RestClientTransport(restClient,mapper);
         TransportOptions transportOptions = new DefaultTransportOptions();
         ElasticsearchClient elasticsearchClient = new ElasticsearchClient(transport,transportOptions);
-
+        GetRequest getRequest = new GetRequest.Builder().index("my_index").id("1").build();
+        GetResponse<JSONObject> getResponse = elasticsearchClient.get(getRequest, JSONObject.class);
+        System.out.println(getResponse);
     }
 
 }
