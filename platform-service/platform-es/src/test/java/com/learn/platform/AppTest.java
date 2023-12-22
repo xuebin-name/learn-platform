@@ -1,6 +1,13 @@
 package com.learn.platform;
 
 import cn.hutool.http.Method;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.json.JsonpMapper;
+import co.elastic.clients.json.jackson.JacksonJsonpMapper;
+import co.elastic.clients.transport.DefaultTransportOptions;
+import co.elastic.clients.transport.ElasticsearchTransport;
+import co.elastic.clients.transport.TransportOptions;
+import co.elastic.clients.transport.rest_client.RestClientTransport;
 import com.alibaba.fastjson2.JSONObject;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -53,6 +60,18 @@ public class AppTest
         RestClient client = RestClient.builder(new HttpHost("127.0.0.1", 9200, "http")).build();
         Response response = client.performRequest(request);
         System.out.println(JSONObject.toJSONString(response));
+
+    }
+
+
+
+    public void testEsClient(){
+        HttpHost httpHost = new HttpHost("127.0.0.1", 9200, "http");
+        RestClient restClient = RestClient.builder(httpHost).build();
+        JsonpMapper mapper = new JacksonJsonpMapper();
+        ElasticsearchTransport transport = new RestClientTransport(restClient,mapper);
+        TransportOptions transportOptions = new DefaultTransportOptions();
+        ElasticsearchClient elasticsearchClient = new ElasticsearchClient(transport,transportOptions);
 
     }
 
