@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: platform-netty
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        namespace: 6787988d-8c13-4a96-9d4e-5b6bad1fe14b
+        group: DEFAULT_GROUP
+        data-id: ${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+        refresh: true
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 6787988d-8c13-4a96-9d4e-5b6bad1fe14b
+        group: DEFAULT_GROUP

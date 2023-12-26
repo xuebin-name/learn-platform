@@ -19,6 +19,8 @@
     <file url="file://$PROJECT_DIR$/platform-service/platform-chatgpt/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/platform-service/platform-es/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/platform-service/platform-es/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform-service/platform-netty/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform-service/platform-netty/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/platform-service/platform-user-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/platform-service/platform-user-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/platform-service/src/main/java" charset="UTF-8" />

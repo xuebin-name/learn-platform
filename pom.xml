@@ -71,6 +71,7 @@
         <jjwt-jackson.version>0.12.3</jjwt-jackson.version>
         <jjwt-impl.version>0.12.3</jjwt-impl.version>
         <jjwt-api.version>0.12.3</jjwt-api.version>
+        <netty.version>5.0.0.Alpha2</netty.version>
     </properties>
 
 
@@ -108,6 +109,12 @@
             </dependency>
             <!--==================================================================================-->
 
+            <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
             <dependency>

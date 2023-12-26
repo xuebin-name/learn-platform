@@ -15,6 +15,7 @@
         <module>platform-user-service</module>
         <module>platform-chatgpt</module>
         <module>platform-es</module>
+        <module>platform-netty</module>
     </modules>
 
     <properties>
@@ -64,10 +65,7 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes
         <dependency>
             <groupId>org.apache.curator</groupId>
