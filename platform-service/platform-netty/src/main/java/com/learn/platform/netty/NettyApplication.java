@@ -1,6 +1,6 @@
 package com.learn.platform.netty;
 
-import com.learn.platform.netty.server.NettyServer;
+import io.netty.channel.ChannelFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NettyApplication implements CommandLineRunner {
 
     @Autowired
-    private NettyServer nettyServer;
+    private ChannelFuture channelFuture;
     public static void main(String[] args) {
         SpringApplication.run(NettyApplication.class, args);
         System.out.println("==============================================================");
@@ -26,8 +26,6 @@ public class NettyApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        nettyServer.bind();
-        //Runtime.getRuntime().addShutdownHook(new Thread(()->nettyServer.bind()));
-
+        channelFuture.sync();
     }
 }
