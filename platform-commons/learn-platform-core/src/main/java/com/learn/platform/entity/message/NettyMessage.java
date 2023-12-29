@@ -16,6 +16,8 @@ public class NettyMessage implements Serializable {
     @Serial
     private static final long serialVersionUID = 8976483484312866406L;
 
+    private String channelId;
+
     /**
      *
      */

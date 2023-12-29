@@ -1,11 +1,10 @@
 package com.learn.platform.netty.config;
 
-import com.learn.platform.netty.handler.HeartBeatHandler;
 import com.learn.platform.netty.handler.MyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -14,18 +13,16 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.net.InetSocketAddress;
-import java.nio.channels.Channel;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName NettyConfig
@@ -38,13 +35,23 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class NettyConfig {
     //保存用户对应通道
-    public static final Map<String, Channel> channels = new ConcurrentHashMap<>(16);
+    private static final Map<String, Channel> channels = new ConcurrentHashMap<>(16);
 
     @Value("${netty.port}")
     private Integer nettyPort;
     @Value("${netty.address}")
     private String address;
 
+    public void putChannel(String key,Channel channel){
+        channels.put(key,channel);
+    }
+    public Channel getChannel(String key){
+        return channels.get(key);
+    }
+
+    public List<Channel> channels(){
+        return channels.values().stream().toList();
+    }
     @Bean
     public EventLoopGroup bossGroup(){
         return new NioEventLoopGroup();
@@ -76,8 +83,8 @@ public class NettyConfig {
                 //添加自定义接受数据处理方法
                 socketChannel.pipeline().addLast(new MyServerHandler());
                 //添加心跳机制检测
-                socketChannel.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
-                socketChannel.pipeline().addLast(new HeartBeatHandler());
+                //socketChannel.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
+                //socketChannel.pipeline().addLast(new HeartBeatHandler());
 
                 log.info("netty 设置初始化信息------------------------------end----");
             }
@@ -88,7 +95,7 @@ public class NettyConfig {
     public ChannelFuture bind(ServerBootstrap serverBootstrap, EventLoopGroup bossGroup, EventLoopGroup workerGroup) {
         return serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
-                .childOption(ChannelOption.SO_KEEPALIVE, true)
+                //.childOption(ChannelOption.SO_KEEPALIVE, true)S
                 .childHandler(channelInitializer())
                 .bind(new InetSocketAddress(address,nettyPort))
                 ;
