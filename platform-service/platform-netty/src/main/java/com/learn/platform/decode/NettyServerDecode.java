@@ -1,4 +1,4 @@
-package com.learn.platform.netty.decode;
+package com.learn.platform.decode;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.learn.platform.entity.message.NettyMessage;

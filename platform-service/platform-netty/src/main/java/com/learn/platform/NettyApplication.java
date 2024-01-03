@@ -1,10 +1,9 @@
-package com.learn.platform.netty;
+package com.learn.platform;
 
-import io.netty.channel.ChannelFuture;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @ClassName NettyApplication
@@ -12,11 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Author xue
  * @Date 2023/12/26 10:03
  */
+@EnableDubbo
+@EnableDiscoveryClient
 @SpringBootApplication
-public class NettyApplication implements CommandLineRunner {
+public class NettyApplication {
 
-    @Autowired
-    private ChannelFuture channelFuture;
+
     public static void main(String[] args) {
         SpringApplication.run(NettyApplication.class, args);
         System.out.println("==============================================================");
@@ -24,8 +24,5 @@ public class NettyApplication implements CommandLineRunner {
         System.out.println("==============================================================");
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        channelFuture.sync();
-    }
+
 }

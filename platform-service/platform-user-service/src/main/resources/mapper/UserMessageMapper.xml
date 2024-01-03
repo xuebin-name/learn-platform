@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.platform.service.dao.UserMessageDao">
+
+    <insert id="saveUserMessage">
+        insert into p_message
+            (message_id, message_type, message_status,
+             message, send_user_id, receive_user_id, gmt_create, gmt_update)
+        VALUES (#{messageId},#{messageType},#{messageStatus},
+                #{message},#{sendUserId},#{receiveUserId},now(),now()
+                )
+    </insert>
+</mapper>
