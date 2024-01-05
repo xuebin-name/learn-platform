@@ -1,11 +1,18 @@
 package com.learn.platform.dao.impl;
 
-import com.learn.platform.dao.PlatformEsDao;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
+import co.elastic.clients.elasticsearch.indices.ExistsRequest;
+import co.elastic.clients.transport.endpoints.BooleanResponse;
+import com.alibaba.nacos.common.utils.CollectionUtils;
+import com.learn.platform.entity.es.EsCommonReq;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @ClassName PlatformEsDaoImpl
@@ -13,80 +20,46 @@ import java.util.Optional;
  * @Author xue
  * @Date 2023/12/21 17:12
  */
-public class PlatformEsDaoImpl implements PlatformEsDao {
+@Slf4j
+@Service
+public class PlatformEsDaoImpl {
 
-    @Override
-    public Page searchSimilar(Object entity, String[] fields, Pageable pageable) {
-        return null;
+
+    @Autowired
+    ElasticsearchClient elasticsearchClient;
+
+    /**
+     * 创建索引
+     *
+     * @param reqList 索引列表
+     * @throws IOException 异常
+     */
+    public boolean createIndex(List<EsCommonReq> reqList) throws IOException {
+        if (CollectionUtils.isEmpty(reqList)) {
+            return false;
+        }
+        boolean result = true;
+        for (EsCommonReq userIndex : reqList) {
+            BooleanResponse exists = elasticsearchClient.indices().exists(ExistsRequest.of(a -> a.index(userIndex.getIndex())));
+            if (exists.value()) {
+                continue;
+            }
+            CreateIndexResponse createIndexResponse = elasticsearchClient.indices().create(a -> a.index(userIndex.getIndex()));
+            result = result && createIndexResponse.acknowledged();
+        }
+        return result;
     }
 
-    @Override
-    public Object save(Object entity) {
-        return null;
-    }
 
-    @Override
-    public Iterable saveAll(Iterable entities) {
-        return null;
-    }
-
-    @Override
-    public Optional findById(Object o) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean existsById(Object o) {
-        return false;
-    }
-
-    @Override
-    public Iterable findAll() {
-        return null;
-    }
-
-    @Override
-    public Iterable findAllById(Iterable iterable) {
-        return null;
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void deleteById(Object o) {
-
-    }
-
-    @Override
-    public void delete(Object entity) {
-
-    }
-
-    @Override
-    public void deleteAllById(Iterable iterable) {
-
-    }
-
-    @Override
-    public void deleteAll(Iterable entities) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
-
-    @Override
-    public Iterable findAll(Sort sort) {
-        return null;
-    }
-
-    @Override
-    public Page findAll(Pageable pageable) {
-        return null;
+    public boolean createIndex(EsCommonReq req) throws IOException {
+        if (ObjectUtils.isEmpty(req)) {
+            return false;
+        }
+        BooleanResponse exists = elasticsearchClient.indices().exists(ExistsRequest.of(a -> a.index(req.getIndex())));
+        if (exists.value()) {
+            log.info("当前索引已存在");
+        }
+        CreateIndexResponse createIndexResponse = elasticsearchClient.indices().create(a -> a.index(req.getIndex()));
+        return createIndexResponse.acknowledged();
     }
 }

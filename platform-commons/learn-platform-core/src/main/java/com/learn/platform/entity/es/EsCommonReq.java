@@ -25,14 +25,8 @@ public class EsCommonReq implements Serializable {
      * 索引id
      */
     private String id;
-    /**
-     * 索引
-     */
+
     private String index;
-    /**
-     * 请求方式
-     */
-    private String method;
     /**
      * json请求体
      */
