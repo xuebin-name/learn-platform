@@ -28,7 +28,7 @@
         where id = #{id}
     </update>
 
-    <select id="selectOne" resultType="com.learn.platform.entity.po.User">
+    <select id="selectOne" resultType="com.learn.platform.entity.po.PlatformUser">
         select *
         from p_user
         <where>
@@ -50,15 +50,18 @@
         </where>
     </select>
 
-    <select id="selectById" resultType="com.learn.platform.entity.po.User">
+    <select id="selectById" resultType="com.learn.platform.entity.po.PlatformUser">
         select *
         from p_user
         where id = #{id}
     </select>
 
-    <select id="selectByPlatformId" resultType="com.learn.platform.entity.po.User">
+    <select id="selectByPlatformId" resultType="com.learn.platform.entity.po.PlatformUser">
         select *
         from p_user
         where platform_id = #{platformId}
+    </select>
+    <select id="selectUserByUserName" resultType="com.learn.platform.entity.po.PlatformUser">
+        select * from p_user where user_name=#{userName}
     </select>
 </mapper>

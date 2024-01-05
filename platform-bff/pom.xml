@@ -12,8 +12,10 @@
     <artifactId>platform-bff</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>platform-user</module>
+        <module>platform-platformUser</module>
         <module>platform-gateway</module>
+        <module>platform-auth</module>
+        <module>platform-platformUser</module>
     </modules>
 
     <properties>

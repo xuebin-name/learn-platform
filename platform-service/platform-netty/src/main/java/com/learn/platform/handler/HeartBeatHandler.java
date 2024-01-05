@@ -4,6 +4,7 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +24,16 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         if(msg instanceof TextWebSocketFrame){
             TextWebSocketFrame frame = (TextWebSocketFrame)msg;
             log.info("心跳包 msg={}", frame.text());
-            ctx.writeAndFlush(new TextWebSocketFrame("pong"));
-            log.info("回复心跳包 heart={}-","pong");
+            if("ping".equals(frame.text())){
+                ctx.writeAndFlush(new TextWebSocketFrame("pong"));
+                log.info("回复心跳包 heart={}-","pong");
+            }else if("pong".equals(frame.text())){
+                log.info("收到客户端心跳回复");
+                ctx.writeAndFlush(new TextWebSocketFrame("收到客户端心跳回复"));
+            }else {
+                ctx.fireChannelRead(msg);
+            }
+
         }else {
             //传递消息到下一个处理器
             ctx.fireChannelRead(msg);
@@ -46,13 +55,14 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         if(evt instanceof TextWebSocketFrame){
             TextWebSocketFrame frame = (TextWebSocketFrame) evt;
             log.info("心跳包信息{}",frame.text());
-            if("ping".equals(frame.text())){
+            if("ping".equals(frame.text()) || "pong".equals(frame.text())){
                 ctx.writeAndFlush(new TextWebSocketFrame("pong"));
             }else {
                 ctx.writeAndFlush(new TextWebSocketFrame("收到消息"+frame.text()));
-                ctx.fireChannelRead(evt);
             }
 
+        }else if(evt instanceof IdleStateEvent){
+            ctx.writeAndFlush(new TextWebSocketFrame("ping"));
         }
         /*if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;

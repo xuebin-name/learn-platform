@@ -13,5 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>learn-platform-core</module>
+        <module>platform-redis</module>
     </modules>
 </project>

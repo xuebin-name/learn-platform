@@ -4,11 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-parent</artifactId>
-        <version>3.0.2</version>
-    </parent>
     <groupId>com.learn.platform</groupId>
     <artifactId>learn-platform</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -17,8 +12,6 @@
         <module>platform-bff</module>
         <module>platform-commons</module>
         <module>platform-service</module>
-        <module>platform-commons/platform-redis</module>
-        <module>platform-commons/platform-auth</module>
     </modules>
 
     <properties>
@@ -27,12 +20,10 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
         <spring-boot-dependences.version>3.0.2</spring-boot-dependences.version>
         <spring-cloud.version>2022.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
         <lombok.version>1.18.20</lombok.version>
-        <security.version>3.1.5</security.version>
         <spring-boot-tools.version>3.2.0</spring-boot-tools.version>
         <spring-boot-start-web.version>3.2.0</spring-boot-start-web.version>
         <spring-boot-configuration-processor.version>3.2.0</spring-boot-configuration-processor.version>
@@ -41,8 +32,9 @@
         <elasticsearch.version>8.11.0</elasticsearch.version>
         <redis.version>3.2.0</redis.version>
         <mysql.version>8.0.33</mysql.version>
+        <!--<security.version>3.1.5</security.version>
         <oath2-client.version>3.2.0</oath2-client.version>
-        <oath2-server.version>3.2.0</oath2-server.version>
+        <oath2-server.version>3.2.0</oath2-server.version>-->
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-codec.version>1.16.0</commons-codec.version>
         <commons-pool2.version>2.12.0</commons-pool2.version>
@@ -113,7 +105,6 @@
                 <scope>import</scope>
             </dependency>
             <!--==================================================================================-->
-
 
 
             <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
@@ -212,12 +203,6 @@
                 <version>${spring-boot-start-web.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-                <version>${security.version}</version>
-            </dependency>
-
             <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -276,7 +261,7 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${redis.version}</version>
             </dependency>
-           <!--Redis客户端-->
+            <!--Redis客户端-->
             <!-- https://mvnrepository.com/artifact/io.lettuce/lettuce-core -->
             <dependency>
                 <groupId>io.lettuce</groupId>
@@ -289,18 +274,6 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-oauth2-client</artifactId>
-                <version>${oath2-client.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-                <version>${oath2-server.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp -->
@@ -339,6 +312,8 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
             <version>${actuator.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

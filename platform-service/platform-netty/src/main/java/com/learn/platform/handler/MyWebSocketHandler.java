@@ -1,17 +1,17 @@
 package com.learn.platform.handler;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.learn.platform.config.UserChannel;
 import com.learn.platform.entity.message.NettyMessage;
+import com.learn.platform.server.UserHandlerService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.group.ChannelGroup;
-import io.netty.channel.group.DefaultChannelGroup;
-import io.netty.handler.codec.http.DefaultHttpRequest;
-import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
-import io.netty.util.concurrent.GlobalEventExecutor;
+import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,10 +25,12 @@ import org.springframework.stereotype.Component;
 @ChannelHandler.Sharable
 public class MyWebSocketHandler extends SimpleChannelInboundHandler<NettyMessage> {
 
-    public static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
+    @Autowired
+    private UserHandlerService userHandlerService;
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        UserChannel.groupAdd(ctx.channel());
         log.info("连接首先进入");
     }
 
@@ -41,7 +43,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<NettyMessage
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         log.info("连接之后进入");
         if(evt instanceof WebSocketServerProtocolHandler.HandshakeComplete){
-            channelGroup.add(ctx.channel());
+            UserChannel.groupAdd(ctx.channel());
             WebSocketServerProtocolHandler.HandshakeComplete handshakeComplete = (WebSocketServerProtocolHandler.HandshakeComplete) evt;
             String s = handshakeComplete.requestUri();
             log.info("请求 remote={}- id={} - uri={}",ctx.channel().remoteAddress(),ctx.channel().id(),s);
@@ -51,18 +53,34 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<NettyMessage
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        log.info("连接断开 剩余客户端 {}",channelGroup.size());
+        log.info("连接断开 剩余客户端 {}",UserChannel.getGroups().size());
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if (msg instanceof DefaultHttpRequest) {
+        if(msg instanceof IdleStateEvent){
+            return;
+        }
+        if(msg instanceof TextWebSocketFrame){
+            //解析非心跳数据
+            TextWebSocketFrame message = (TextWebSocketFrame) msg;
+            log.info("业务处理消息 message={}",message.text());
+            NettyMessage nettyMessage = JSONObject.parseObject(message.text(), NettyMessage.class);
+            try {
+                userHandlerService.chatMessage(nettyMessage);
+            }catch (Exception e){
+                log.error("业务处理异常");
+                log.error(e.getMessage());
+
+            }
+        }
+        /*if (msg instanceof DefaultHttpRequest) {
             HttpRequest request = (HttpRequest) msg;
             String uri = request.uri();
             String id = uri.split("/")[2];
             log.info(" 读取到id={}",id);
             request.setUri("/ws");
-        }
+        }*/
         super.channelRead(ctx, msg);
     }
 
