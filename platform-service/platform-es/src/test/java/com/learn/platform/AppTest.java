@@ -37,7 +37,6 @@ public class AppTest
     }
 
 
-
     public void testEsClient() throws IOException {
 
     }
