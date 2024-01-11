@@ -9,7 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Author xue
  * @Date 2023/12/20 14:41
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchClientAutoConfiguration.class,
+        org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration.class,})
 public class PlatformElasticsearch {
 
     public static void main(String[] args) {

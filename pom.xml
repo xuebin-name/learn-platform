@@ -61,9 +61,6 @@
         <okhttp.version>5.0.0-alpha.11</okhttp.version>
         <jackson-annotations.version>2.16.0</jackson-annotations.version>
         <jackson-core.version>2.16.0</jackson-core.version>
-        <elasticsearch-rest-client.version>8.11.3</elasticsearch-rest-client.version>
-        <elasticsearch-rest-high-level-client.version>7.17.14</elasticsearch-rest-high-level-client.version>
-        <elasticsearch-java.version>8.11.2</elasticsearch-java.version>
         <redis-client.version>6.3.0.RELEASE</redis-client.version>
         <jjwt-jackson.version>0.12.3</jjwt-jackson.version>
         <jjwt-impl.version>0.12.3</jjwt-impl.version>
@@ -229,31 +226,6 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-                <version>${spring-boot-starter-data-elasticsearch.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
-            <dependency>
-                <groupId>org.elasticsearch.client</groupId>
-                <artifactId>elasticsearch-rest-client</artifactId>
-                <version>${elasticsearch-rest-client.version}</version>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/co.elastic.clients/elasticsearch-java -->
-            <dependency>
-                <groupId>co.elastic.clients</groupId>
-                <artifactId>elasticsearch-java</artifactId>
-                <version>${elasticsearch-java.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
-            <dependency>
-                <groupId>org.elasticsearch</groupId>
-                <artifactId>elasticsearch</artifactId>
-                <version>${elasticsearch.version}</version>
             </dependency>
 
             <dependency>

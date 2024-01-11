@@ -3,6 +3,9 @@ package com.learn.platform.entity.common;
 import com.learn.platform.entity.enums.ResponseCodeEnum;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * @ClassName PlatformResult
  * @Description 平台通用返回参数
@@ -10,8 +13,11 @@ import lombok.Data;
  * @Date 2023/12/15 15:27
  */
 @Data
-public class PlatformResult<T> {
+public class PlatformResult<T> implements Serializable {
 
+
+    @Serial
+    private static final long serialVersionUID = 5738196694720700717L;
     private int code;
 
     private String message;
