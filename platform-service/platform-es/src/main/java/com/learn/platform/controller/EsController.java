@@ -2,8 +2,9 @@ package com.learn.platform.controller;
 
 import co.elastic.clients.elasticsearch.indices.GetIndexResponse;
 import com.learn.platform.annotation.WebLog;
-import com.learn.platform.entity.common.PlatformResult;
 import com.learn.platform.entity.IndexReq;
+import com.learn.platform.entity.common.PlatformResult;
+import com.learn.platform.entity.es.DocReq;
 import com.learn.platform.entity.es.SearchReq;
 import com.learn.platform.service.Impl.PlatformEsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ public class EsController {
     private PlatformEsServiceImpl platformEsService;
 
     /**
-     * @param indexName 索引名称
+     * @param req 索引名称
      * @return 是否成功
      * @throws Exception
      */
@@ -36,6 +37,13 @@ public class EsController {
     public PlatformResult<Object> createIndex(@RequestBody IndexReq req) throws Exception {
         return PlatformResult.success(platformEsService.createIndex(req));
     }
+
+    /***
+     * 获取索引
+     * @param indexName
+     * @return
+     * @throws Exception
+     */
     @WebLog
     @GetMapping("/getIndex")
     public PlatformResult<Object> getIndex(String indexName) throws Exception {
@@ -44,7 +52,57 @@ public class EsController {
         return PlatformResult.success(getindex.result().get(indexName));
     }
 
+    /**
+     * 创建文档
+     * @param docReq
+     * @return
+     * @throws IOException
+     */
+    @WebLog
+    @PostMapping("/createDoc")
+    public PlatformResult createDoc(@RequestBody DocReq docReq) throws IOException {
+        platformEsService.createDoc(docReq);
+        return PlatformResult.success();
+    }
 
+    @WebLog
+    @PostMapping("/updateDoc")
+    public PlatformResult updateDoc(@RequestBody DocReq docReq) throws IOException {
+        return PlatformResult.success(platformEsService.updateDoc(docReq));
+    }
+
+    /**
+     * 删除文档
+     * @param docReq
+     * @return
+     * @throws IOException
+     */
+    @WebLog
+    @PostMapping("/deleteDoc")
+    public PlatformResult deleteDoc(@RequestBody DocReq docReq) throws IOException {
+        platformEsService.deleteDoc(docReq);
+        return PlatformResult.success();
+    }
+
+    /**
+     * 删除索引
+     * @param indexName
+     * @return
+     * @throws IOException
+     */
+    @WebLog
+    @PostMapping("/deleteIndex")
+    public PlatformResult deleteIndex(String indexName) throws IOException {
+        platformEsService.deleteIndex(indexName);
+        return PlatformResult.success();
+    }
+
+    /**
+     * 查询结果
+     * @param req
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/search")
     @ResponseBody
     @WebLog
