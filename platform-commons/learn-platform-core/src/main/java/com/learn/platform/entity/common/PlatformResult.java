@@ -39,6 +39,10 @@ public class PlatformResult<T> implements Serializable {
         return result(ResponseCodeEnum.FAIL.getCode(), ResponseCodeEnum.FAIL.getMessage(), data);
     }
 
+    public static <T> PlatformResult<T> fail() {
+        return result(ResponseCodeEnum.FAIL.getCode(), ResponseCodeEnum.FAIL.getMessage(), null);
+    }
+
     public static <T> PlatformResult<T> fail(T data,String message) {
         return result(ResponseCodeEnum.FAIL.getCode(), message, data);
     }

@@ -9,7 +9,7 @@ public enum ResponseCodeEnum {
      */
     SUCCESS(200,"处理成功"),
 
-    FAIL(500,"系统异常"),
+    FAIL(500,"崩溃了呦，慢点，慢点"),
 
     ;
 

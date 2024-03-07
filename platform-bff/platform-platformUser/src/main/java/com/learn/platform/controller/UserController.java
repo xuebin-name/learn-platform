@@ -3,6 +3,7 @@ package com.learn.platform.controller;
 import com.learn.platform.annotation.WebLog;
 import com.learn.platform.entity.common.PlatformResult;
 import com.learn.platform.entity.po.PlatformUser;
+import com.learn.platform.service.user.UserMsgService;
 import com.learn.platform.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -28,6 +29,8 @@ public class UserController implements Serializable {
 
     @Value("${testValue}")
     private String testValue;
+    @DubboReference
+    private UserMsgService userMsgService;
 
     @GetMapping("/test")
     public PlatformResult<String> test(){
@@ -57,4 +60,24 @@ public class UserController implements Serializable {
         userService.insert(platformUser);
         return PlatformResult.success();
     }
+
+    @PostMapping("/send")
+    @WebLog(description = "发送Kafka mq消息")
+    public PlatformResult<Void> sendMessage(@RequestParam String topic, @RequestParam String message) {
+        userMsgService.send(topic,message);
+        return PlatformResult.success();
+    }
+    @PostMapping("/sendRocket")
+    @WebLog(description = "发送Kafka mq消息")
+    public PlatformResult<Void> sendRocketMessage(@RequestParam String topic, @RequestParam String message) {
+        userMsgService.sendRocket(topic,message);
+        return PlatformResult.success();
+    }
+    @PostMapping("/sendRabbit")
+    @WebLog(description = "发送Kafka mq消息")
+    public PlatformResult<Void> sendRabbitMessage(@RequestParam String queue, @RequestParam String message) {
+        userMsgService.sendRabbit(queue,message);
+        return PlatformResult.success();
+    }
+
 }

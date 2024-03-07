@@ -3,6 +3,7 @@ package com.learn.platform;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @ClassName UserServiceApplication
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date 2023/12/18 14:33
  */
 @EnableDubbo
+@EnableDiscoveryClient
 @SpringBootApplication
 public class UserServiceApplication {
 

@@ -14,5 +14,8 @@
     <modules>
         <module>learn-platform-core</module>
         <module>platform-redis</module>
+        <module>platform-kafka</module>
+        <module>platform-rocketMq</module>
+        <module>platform-rabbitMq</module>
     </modules>
 </project>

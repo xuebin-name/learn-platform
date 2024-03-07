@@ -31,6 +31,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<NettyMessage
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         UserChannel.groupAdd(ctx.channel());
+        ctx.channel().writeAndFlush("链接成功");
         log.info("连接首先进入");
     }
 
