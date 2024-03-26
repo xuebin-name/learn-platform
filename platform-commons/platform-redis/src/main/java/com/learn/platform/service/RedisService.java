@@ -18,7 +18,7 @@ public class RedisService {
 
 
     @Autowired
-    RedisTemplate redisTemplate;
+    RedisTemplate<String,Object> redisTemplate;
 
 
     /**
@@ -28,8 +28,8 @@ public class RedisService {
      * @param key 键
      * @return 对应的value值
      */
-    public <T> T getObject(String key) {
-        ValueOperations<String, T> valueOperations = redisTemplate.opsForValue();
+    public Object getObject(String key) {
+        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         return valueOperations.get(key);
     }
 

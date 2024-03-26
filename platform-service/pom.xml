@@ -16,6 +16,7 @@
         <module>platform-chatgpt</module>
         <module>platform-es</module>
         <module>platform-netty</module>
+        <module>platform-cache-service</module>
     </modules>
 
     <properties>
